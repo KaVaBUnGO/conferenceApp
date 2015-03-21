@@ -14,8 +14,8 @@ public class Room {
     @Column(nullable = false)
     private String name;
 
-    @OneToMany(mappedBy = "roomId")
-    private Set<Presentation> presentations = new HashSet<Presentation>(0);
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "room")
+    private Set<Presentation> presentations;
 
     public Room() {
     }

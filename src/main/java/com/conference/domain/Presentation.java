@@ -1,6 +1,7 @@
 package com.conference.domain;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Presentation {
@@ -12,14 +13,18 @@ public class Presentation {
     @Column(nullable = false)
     private String name;
 
-    @Column(nullable = false)
-    private Long roomId;
+    @ManyToOne(optional = false)
+    private Room room;
 
+    @ManyToMany(mappedBy = "presentations")
+    private List<User> users;
 
+    protected Presentation() {
+    }
 
-    public Presentation(String name, Long roomId) {
+    public Presentation(String name, Room room) {
         this.name = name;
-        this.roomId = roomId;
+        this.room = room;
     }
 
     public Long getId() {
@@ -38,19 +43,22 @@ public class Presentation {
         this.name = name;
     }
 
-    public Long getRoomId() {
-        return roomId;
+    public Room getRoom() {
+        return room;
     }
 
-    public void setRoomId(Long roomId) {
-        this.roomId = roomId;
+    public void setRoom(Room room) {
+        this.room = room;
     }
 
+    public List<User> getUsers() {
+        return users;
+    }
 
     @Override
     public String toString() {
         return String.format(
-                "Presentation[id=%d, name='%s', roomId='%d']",
-                id, name, roomId);
+                "Presentation[id=%d, name='%s']",
+                id, name);
     }
 }
