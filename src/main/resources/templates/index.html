@@ -1,0 +1,18 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Conference service there</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+    <div th:each="room : ${rooms}">
+        <span th:text="${room.name}">Room name...</span>
+        <div th:each="presentation : ${room.presentations}">
+            <span th:text="${presentation.name}">presentation name...</span>
+            <div th:each="user : ${presentation.users}">
+                <span th:text="${user.email}">user email</span>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
