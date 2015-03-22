@@ -20,15 +20,7 @@
         </div>
     </div>
 
-    <div th:each="room : ${rooms}">
-        <span th:text="${room.name}">Room name...</span>
-        <div th:each="presentation : ${room.presentations}">
-            <span th:text="${presentation.name}">presentation name...</span>
-            <div th:each="user : ${presentation.users}">
-                <span th:text="${user.name}">user name</span>
-            </div>
-        </div>
-    </div>
+
 </div>
 
 </body>

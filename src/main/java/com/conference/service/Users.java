@@ -31,6 +31,9 @@ public class Users implements UserDetailsService {
         if (username.equals("admin")) {
             auth = AuthorityUtils.commaSeparatedStringToAuthorityList("ROLE_ADMIN");
         }
+        if (username.equals("presenter")) {
+            auth = AuthorityUtils.commaSeparatedStringToAuthorityList("ROLE_PRESENTER");
+        }
         String password = user.getPassword();
         return new org.springframework.security.core.userdetails.User(username, password,
                 auth);

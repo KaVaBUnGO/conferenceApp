@@ -13,6 +13,7 @@ INSERT INTO presentation(name, room_id) VALUES ('Presentation 3', 2)
 
 -- Users
 insert into user (name, password) values ('user', 'user');
+insert into user (name, password) values ('presenter', 'presenter');
 insert into user (name, password) values ('admin', 'admin');
 
 -- User_presentation
