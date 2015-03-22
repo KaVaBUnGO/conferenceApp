@@ -12,8 +12,8 @@ INSERT INTO presentation(name, room_id) VALUES ('Presentation 2', 1)
 INSERT INTO presentation(name, room_id) VALUES ('Presentation 3', 2)
 
 -- Users
-INSERT INTO user(email, password_hash, role) VALUES ('admin@mail.com', '123', 'ADMIN')
-INSERT INTO user(email, password_hash, role) VALUES ('admin2@mail.com', '123', 'ADMIN')
+insert into user (name, password) values ('user', 'user');
+insert into user (name, password) values ('admin', 'admin');
 
 -- User_presentation
 INSERT INTO user_presentation(user_id, presentation_id) VALUES (1, 1)

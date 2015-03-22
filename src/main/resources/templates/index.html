@@ -3,16 +3,31 @@
 <head>
     <title>Conference service there</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"
+          href="../../css/bootstrap.min.css" />
 </head>
 <body>
+<div class="container">
+    <div class="navbar">
+        <div class="navbar-inner">
+            <a class="brand"> Conferences service </a>
+            <ul class="nav">
+                <li ><a th:href="@{/}" href="home.html"> Home </a></li>
+                <li sec:authorize="isAnonymous()"><a th:href="@{/login}" href="login"> Login </a></li>
+                <li sec:authorize="isAuthenticated()"><a th:href="@{/logout}" href="logout"> Logout </a></li>
+            </ul>
+        </div>
+    </div>
     <div th:each="room : ${rooms}">
         <span th:text="${room.name}">Room name...</span>
         <div th:each="presentation : ${room.presentations}">
             <span th:text="${presentation.name}">presentation name...</span>
             <div th:each="user : ${presentation.users}">
-                <span th:text="${user.email}">user email</span>
+                <span th:text="${user.name}">user name</span>
             </div>
         </div>
     </div>
+</div>
+
 </body>
 </html>

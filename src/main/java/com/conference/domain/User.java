@@ -12,16 +12,17 @@ public class User {
     @Column(name = "id", nullable = false, updatable = false)
     private Long id;
 
-    @Column(name = "email", nullable = false, unique = true)
-    private String email;
+    @Column(name = "name", nullable = false, unique = true)
+    private String name;
 
-    @Column(name = "password_hash", nullable = false)
-    private String passwordHash;
+    @Column(name = "password", nullable = false)
+    private String password;
 
+    /*
     @Column(name = "role", nullable = false)
     @Enumerated(EnumType.STRING)
     private Role role;
-
+    */
     @ManyToMany
     @JoinTable(
             name = "user_presentation",
@@ -32,44 +33,25 @@ public class User {
     private User(){
     }
 
-    public User(String email, String passwordHash, Role role) {
-        this.email = email;
-        this.passwordHash = passwordHash;
-        this.role = role;
+    public User(String email, String password) {
+        this.name = email;
+        this.password = password;
     }
 
-    public User(String email, String passwordHash, String role) {
-        this.email = email;
-        this.passwordHash = passwordHash;
-        this.role = Role.valueOf(Role.class, role);
+    public String getName() {
+        return name;
     }
 
-    public Long getId() {
-        return id;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getEmail() {
-        return email;
+    public String getPassword() {
+        return password;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPasswordHash() {
-        return passwordHash;
-    }
-
-    public void setPasswordHash(String passwordHash) {
-        this.passwordHash = passwordHash;
-    }
-
-    public Role getRole() {
-        return role;
-    }
-
-    public void setRole(Role role) {
-        this.role = role;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public List<Presentation> getPresentations() {
@@ -80,9 +62,8 @@ public class User {
     public String toString() {
         return "User{" +
                 "id=" + id +
-                ", email='" + email.replaceFirst("@.*", "@***") +
-                ", passwordHash='" + passwordHash.substring(0, 10) +
-                ", role=" + role +
+                ", email='" + name +
+                ", passwordHash='" + password.substring(0, 10) +
                 '}';
     }
 }

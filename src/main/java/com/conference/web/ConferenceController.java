@@ -14,6 +14,7 @@ public class ConferenceController {
 
     @RequestMapping("/conference")
     public String getConferencePage(Model model){
+        LOGGER.debug("Getting conference page");
         return "conference";
     }
 }
