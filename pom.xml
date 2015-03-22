@@ -8,7 +8,6 @@
     <artifactId>spring-conference-app</artifactId>
     <version>1.0-SNAPSHOT</version>
 
-    <!-- Inherit defaults from Spring Boot -->
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
@@ -17,23 +16,27 @@
 
 
     <dependencies>
-
-        <!-- Add web support-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
-        <!--Adds support for spring data and JPA -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
-        <!-- Add metrics and stats-->
+
+        <!--
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
+         -->
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -46,17 +49,11 @@
             <scope>test</scope>
         </dependency>
 
-
-        <!--
-        Spring boot will create a default in-memory DataSource
-        if the driver is found in the path and no DataSource is configured
-        -->
         <dependency>
             <groupId>org.hsqldb</groupId>
             <artifactId>hsqldb</artifactId>
             <scope>runtime</scope>
         </dependency>
-
     </dependencies>
 
     <!-- Package as an executable JAR -->
@@ -70,8 +67,6 @@
         </plugins>
     </build>
 
-    <!-- Allow access to Spring milestones and snapshots -->
-    <!-- (you don't need this if you are using anything after 1.0.0.RELEASE) -->
     <repositories>
         <repository>
             <id>spring-snapshots</id>

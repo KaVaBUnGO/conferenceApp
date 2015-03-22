@@ -2,7 +2,6 @@ package com.conference.service;
 
 import com.conference.ConferenceApplication;
 import com.conference.domain.Room;
-import junit.framework.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
