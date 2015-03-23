@@ -81,6 +81,14 @@ public class PresentationsController {
         return "presentationForm";
     }
 
+    @RequestMapping("/delete/{presentationId}")
+    @Secured("ROLE_PRESENTER")
+    public String deletePresentation(@PathVariable("presentationId") Long presentationId){
+        LOGGER.debug("Delete presentation by id action");
+        presentationRepository.delete(presentationId);
+        return "redirect:list";
+    }
+
 
     private class RoomEditor extends PropertyEditorSupport {
         @Override
