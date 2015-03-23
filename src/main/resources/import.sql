@@ -12,9 +12,9 @@ INSERT INTO presentation(name, room_id) VALUES ('Presentation 2', 1)
 INSERT INTO presentation(name, room_id) VALUES ('Presentation 3', 2)
 
 -- Users
-insert into user (name, password) values ('user', 'user');
-insert into user (name, password) values ('presenter', 'presenter');
-insert into user (name, password) values ('admin', 'admin');
+insert into user (name, password, role) values ('user', 'user', 'ROLE_LISTENER');
+insert into user (name, password, role) values ('presenter', 'presenter', 'ROLE_PRESENTER');
+insert into user (name, password, role) values ('admin', 'admin', 'ROLE_ADMIN');
 
 -- User_presentation
 INSERT INTO user_presentation(user_id, presentation_id) VALUES (1, 1)

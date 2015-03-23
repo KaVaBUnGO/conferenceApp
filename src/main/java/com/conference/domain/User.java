@@ -18,25 +18,16 @@ public class User {
     @Column(name = "password", nullable = false)
     private String password;
 
-    /*
     @Column(name = "role", nullable = false)
     @Enumerated(EnumType.STRING)
     private Role role;
-    */
+
     @ManyToMany
     @JoinTable(
             name = "user_presentation",
             joinColumns = {@JoinColumn(name="user_id", referencedColumnName = "id")},
             inverseJoinColumns = {@JoinColumn(name = "presentation_id", referencedColumnName = "id")})
     private List<Presentation> presentations;
-
-    private User(){
-    }
-
-    public User(String email, String password) {
-        this.name = email;
-        this.password = password;
-    }
 
     public Long getId() {
         return id;
@@ -60,6 +51,14 @@ public class User {
 
     public List<Presentation> getPresentations() {
         return presentations;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
     }
 
     @Override

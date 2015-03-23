@@ -2,6 +2,6 @@ package com.conference.domain;
 
 public enum Role {
 
-    USER, ADMIN
+    ROLE_LISTENER, ROLE_PRESENTER, ROLE_ADMIN
 
 }
