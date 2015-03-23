@@ -7,18 +7,8 @@
           href="../../css/bootstrap.min.css" />
 </head>
 <body>
+<div th:replace="fragments/header :: header">&nbsp;</div>
 <div class="container">
-    <div class="navbar">
-        <div class="navbar-inner">
-            <a class="brand"> Conferences service </a>
-            <ul class="nav">
-                <li ><a th:href="@{/}" href="home.html"> Home </a></li>
-                <li sec:authorize="hasRole('ROLE_PRESENTER')"><a th:href="@{/presentations}" href="presentations"> Presentations </a></li>
-                <li sec:authorize="isAnonymous()"><a th:href="@{/login}" href="login"> Login </a></li>
-                <li sec:authorize="isAuthenticated()"><a th:href="@{/logout}" href="logout"> Logout </a></li>
-            </ul>
-        </div>
-    </div>
 
     <div th:each="room : ${rooms}">
         <span th:text="${room.name}">Room name...</span>

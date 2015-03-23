@@ -19,7 +19,7 @@ public class Presentation {
     @ManyToMany(mappedBy = "presentations")
     private List<User> users;
 
-    protected Presentation() {
+    public Presentation() {
     }
 
     public Presentation(String name, Room room) {
@@ -53,6 +53,10 @@ public class Presentation {
 
     public List<User> getUsers() {
         return users;
+    }
+
+    public void setUsers(List<User> users) {
+        this.users = users;
     }
 
     @Override

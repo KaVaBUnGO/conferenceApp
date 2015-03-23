@@ -6,15 +6,8 @@
           href="../../css/bootstrap.min.css" />
 </head>
 <body onload="document.f.username.focus();">
+<div th:replace="fragments/header :: header">&nbsp;</div>
 <div class="container">
-    <div class="navbar">
-        <div class="navbar-inner">
-            <a class="brand"> Conferences service </a>
-            <ul class="nav">
-                <li><a th:href="@{/}" href="home.html"> Home </a></li>
-            </ul>
-        </div>
-    </div>
     <div class="content">
         <p th:if="${param.logout}" class="alert">You have been logged out</p>
         <p th:if="${param.error}" class="alert alert-error">There was an error, please try again</p>

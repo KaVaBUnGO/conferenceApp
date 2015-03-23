@@ -1,6 +1,5 @@
 package com.conference.domain;
 
-import javax.annotation.Generated;
 import javax.persistence.*;
 import java.util.List;
 
