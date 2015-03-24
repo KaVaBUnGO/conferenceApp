@@ -19,7 +19,7 @@ public class Presentation {
     @JoinColumn(name="room_id", nullable=false)
     private Room room;
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.EAGER)
     @JoinTable(
             name = "presentation_user",
             joinColumns = {@JoinColumn(name="presentation_id", referencedColumnName = "id")},

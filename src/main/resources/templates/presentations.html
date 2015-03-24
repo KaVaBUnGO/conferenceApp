@@ -59,7 +59,7 @@
 
                         <a class="btn btn-primary"
                            onclick="return confirm('Are you sure you want to delete this presentation?');"
-                           href="#" th:href="@{delete/(${presentation.id})}">
+                           href="#" th:href="@{delete/{id}(id=${presentation.id})}">
                                  <i class="fa fa-times"></i>Delete
                         </a>
 

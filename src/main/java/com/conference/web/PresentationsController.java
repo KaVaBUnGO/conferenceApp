@@ -49,19 +49,8 @@ public class PresentationsController {
     @Secured("ROLE_PRESENTER")
     public String getPresentationsPage(Model model) {
         LOGGER.debug("Getting presentations page");
-
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         CurrentUser user = (CurrentUser) authentication.getPrincipal();
-        LOGGER.debug("user id = " +user.getId());
-        LOGGER.debug("find presentations: " + presentationRepository.findByUsersIdIn(Collections.singleton(user.getId())));
-        for(Presentation p : presentationRepository.findAll()){
-            String ans = "";
-            ans+=p.getName();
-            for(User u : p.getUsers()){
-                ans+=" ".concat(u.getName()).concat(" ").concat(String.valueOf(u.getId()));
-            }
-            LOGGER.debug(ans);
-        }
         model.addAttribute("presentation", new Presentation());
         model.addAttribute("userPresentations", presentationRepository.findByUsersIdIn(Collections.singleton(user.getId())));
         model.addAttribute("rooms", roomRepository.findAll());
@@ -71,7 +60,7 @@ public class PresentationsController {
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     @Secured("ROLE_PRESENTER")
     public String savePresentation(@ModelAttribute("presentation") Presentation presentation, BindingResult bindingResult) {
-        LOGGER.debug("Getting save presentation action " + presentation.toString() + " " + presentation.getRoom().toString());
+        LOGGER.debug("Getting save presentation action ");
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         CurrentUser currentUser = (CurrentUser) authentication.getPrincipal();
         presentation.setUsers(Arrays.asList(userRepository.findById(currentUser.getId())));
@@ -83,7 +72,6 @@ public class PresentationsController {
     @Secured("ROLE_PRESENTER")
     public String getPresentation(@PathVariable Long presentationId, Model model){
         LOGGER.debug("Getting presentation by id action");
-
         Presentation presentation = presentationRepository.findOne(presentationId);
         model.addAttribute("presentation", presentation);
         model.addAttribute("rooms", roomRepository.findAll());
@@ -95,7 +83,7 @@ public class PresentationsController {
     public String deletePresentation(@PathVariable("presentationId") Long presentationId){
         LOGGER.debug("Delete presentation by id action");
         Presentation p = presentationRepository.findOne(presentationId);
-        presentationRepository.delete(1L);
+        presentationRepository.delete(p);
         return "redirect:/presentations/list";
     }
 
