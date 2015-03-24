@@ -38,7 +38,7 @@ public class PresentationRepositoryTest {
 
     @Test
     public void findPresentationByUser() {
-        User user = userRepository.findById(1L);
+        User user = userRepository.findById(2L);
         List<Presentation> presentationList = presentationRepository.findByUsersIn(Collections.singleton(user));
         assertEquals(presentationList.size(), 2);
     }

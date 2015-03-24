@@ -1,5 +1,7 @@
 package com.conference.domain;
 
+import org.hibernate.annotations.Cascade;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -14,9 +16,14 @@ public class Presentation {
     private String name;
 
     @ManyToOne(optional = false)
+    @JoinColumn(name="room_id", nullable=false)
     private Room room;
 
-    @ManyToMany(mappedBy = "presentations", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "presentation_user",
+            joinColumns = {@JoinColumn(name="presentation_id", referencedColumnName = "id")},
+            inverseJoinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")})
     private List<User> users;
 
     public Presentation() {

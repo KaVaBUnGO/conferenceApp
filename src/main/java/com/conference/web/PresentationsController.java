@@ -74,10 +74,8 @@ public class PresentationsController {
         LOGGER.debug("Getting save presentation action " + presentation.toString() + " " + presentation.getRoom().toString());
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         CurrentUser currentUser = (CurrentUser) authentication.getPrincipal();
-        presentation.setUsers(Arrays.asList(userRepository.findById(2L)));
-        Presentation p = presentationRepository.save(presentation);
-        LOGGER.debug(p.getUsers().iterator().next().getId().toString());
-        LOGGER.debug(p.getUsers().iterator().next().getName());
+        presentation.setUsers(Arrays.asList(userRepository.findById(currentUser.getId())));
+        presentationRepository.save(presentation);
         return "redirect:list";
     }
 
@@ -96,8 +94,9 @@ public class PresentationsController {
     @Secured("ROLE_PRESENTER")
     public String deletePresentation(@PathVariable("presentationId") Long presentationId){
         LOGGER.debug("Delete presentation by id action");
-        presentationRepository.delete(presentationId);
-        return "redirect:list";
+        Presentation p = presentationRepository.findOne(presentationId);
+        presentationRepository.delete(1L);
+        return "redirect:/presentations/list";
     }
 
 

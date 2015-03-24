@@ -17,6 +17,6 @@ insert into user (name, password, role) values ('presenter', 'presenter', 'ROLE_
 insert into user (name, password, role) values ('admin', 'admin', 'ROLE_ADMIN');
 
 -- User_presentation
-INSERT INTO user_presentation(user_id, presentation_id) VALUES (1, 1)
-INSERT INTO user_presentation(user_id, presentation_id) VALUES (1, 2)
-INSERT INTO user_presentation(user_id, presentation_id) VALUES (2, 1)
+INSERT INTO presentation_user(presentation_id, user_id) VALUES (1, 1)
+INSERT INTO presentation_user(presentation_id, user_id) VALUES (2, 1)
+INSERT INTO presentation_user(presentation_id, user_id) VALUES (2, 2)

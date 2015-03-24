@@ -21,11 +21,7 @@ public class User {
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    @ManyToMany
-    @JoinTable(
-            name = "user_presentation",
-            joinColumns = {@JoinColumn(name="user_id", referencedColumnName = "id")},
-            inverseJoinColumns = {@JoinColumn(name = "presentation_id", referencedColumnName = "id")})
+    @ManyToMany(mappedBy = "users")
     private List<Presentation> presentations;
 
     public Long getId() {

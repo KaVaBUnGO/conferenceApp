@@ -1,6 +1,7 @@
 package com.conference.domain;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -13,8 +14,8 @@ public class Room {
     @Column(nullable = false)
     private String name;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "room")
-    private Set<Presentation> presentations;
+    @OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.ALL, orphanRemoval=true, mappedBy="room")
+    private List<Presentation> presentations;
 
     public Room() {
     }
@@ -39,11 +40,11 @@ public class Room {
         this.name = name;
     }
 
-    public Set<Presentation> getPresentations() {
+    public List<Presentation> getPresentations() {
         return presentations;
     }
 
-    public void setPresentations(Set<Presentation> presentations) {
+    public void setPresentations(List<Presentation> presentations) {
         this.presentations = presentations;
     }
 

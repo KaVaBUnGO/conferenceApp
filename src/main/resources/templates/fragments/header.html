@@ -11,16 +11,17 @@
 <!-- Navbar -->
 <div th:fragment="header">
     <div class="container">
-        <div class="navbar">
-            <div class="navbar-inner">
-                <a class="brand"> Conferences service </a>
-                <ul class="nav">
+        <div class="navbar navbar-default">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#"> Conferences service </a>
+            </div>
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
                     <li ><a th:href="@{/}" href="home.html"> Home </a></li>
                     <li sec:authorize="hasRole('ROLE_PRESENTER')"><a th:href="@{/presentations/list}" href="presentations"> Presentations </a></li>
                     <li sec:authorize="isAnonymous()"><a th:href="@{/login}" href="login"> Login </a></li>
                     <li sec:authorize="isAuthenticated()"><a th:href="@{/logout}" href="logout"> Logout </a></li>
                 </ul>
-                Logged user: <span sec:authentication="name">Bob</span>
             </div>
         </div>
     </div>
