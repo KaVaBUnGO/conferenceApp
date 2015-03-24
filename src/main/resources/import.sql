@@ -1,9 +1,8 @@
 -- Rooms
+INSERT INTO room(name) VALUES ('Yellow room')
 INSERT INTO room(name) VALUES ('Red room')
 INSERT INTO room(name) VALUES ('Green room')
 INSERT INTO room(name) VALUES ('Blue room')
-INSERT INTO room(name) VALUES ('Orange room')
-INSERT INTO room(name) VALUES ('Yellow room')
 
 
 -- Presentations
@@ -20,3 +19,4 @@ insert into user (name, password, role) values ('admin', 'admin', 'ROLE_ADMIN');
 INSERT INTO presentation_user(presentation_id, user_id) VALUES (1, 1)
 INSERT INTO presentation_user(presentation_id, user_id) VALUES (2, 1)
 INSERT INTO presentation_user(presentation_id, user_id) VALUES (2, 2)
+INSERT INTO presentation_user(presentation_id, user_id) VALUES (3, 1)
