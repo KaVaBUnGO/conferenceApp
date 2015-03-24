@@ -4,6 +4,7 @@ package com.conference.web;
 import com.conference.domain.CurrentUser;
 import com.conference.domain.Presentation;
 import com.conference.domain.Room;
+import com.conference.domain.User;
 import com.conference.service.PresentationRepository;
 import com.conference.service.RoomRepository;
 import com.conference.service.UserRepository;
@@ -18,6 +19,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
+import sun.rmi.runtime.Log;
 
 import java.beans.PropertyEditorSupport;
 import java.util.Arrays;
@@ -50,9 +52,16 @@ public class PresentationsController {
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         CurrentUser user = (CurrentUser) authentication.getPrincipal();
-
+        LOGGER.debug("user id = " +user.getId());
         LOGGER.debug("find presentations: " + presentationRepository.findByUsersIdIn(Collections.singleton(user.getId())));
-
+        for(Presentation p : presentationRepository.findAll()){
+            String ans = "";
+            ans+=p.getName();
+            for(User u : p.getUsers()){
+                ans+=" ".concat(u.getName()).concat(" ").concat(String.valueOf(u.getId()));
+            }
+            LOGGER.debug(ans);
+        }
         model.addAttribute("presentation", new Presentation());
         model.addAttribute("userPresentations", presentationRepository.findByUsersIdIn(Collections.singleton(user.getId())));
         model.addAttribute("rooms", roomRepository.findAll());
@@ -65,8 +74,10 @@ public class PresentationsController {
         LOGGER.debug("Getting save presentation action " + presentation.toString() + " " + presentation.getRoom().toString());
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         CurrentUser currentUser = (CurrentUser) authentication.getPrincipal();
-        presentation.setUsers(Arrays.asList(currentUser.getUser()));
-        presentationRepository.save(presentation);
+        presentation.setUsers(Arrays.asList(userRepository.findById(2L)));
+        Presentation p = presentationRepository.save(presentation);
+        LOGGER.debug(p.getUsers().iterator().next().getId().toString());
+        LOGGER.debug(p.getUsers().iterator().next().getName());
         return "redirect:list";
     }
 

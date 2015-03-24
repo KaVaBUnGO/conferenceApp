@@ -16,7 +16,7 @@ public class Presentation {
     @ManyToOne(optional = false)
     private Room room;
 
-    @ManyToMany(mappedBy = "presentations")
+    @ManyToMany(mappedBy = "presentations", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<User> users;
 
     public Presentation() {
