@@ -14,7 +14,7 @@ public class Room {
     @Column(nullable = false)
     private String name;
 
-    @OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.ALL, orphanRemoval=true, mappedBy="room")
+    @OneToMany(fetch=FetchType.EAGER, mappedBy="room")
     private List<Presentation> presentations;
 
     public Room() {

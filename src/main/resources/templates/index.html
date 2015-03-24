@@ -18,7 +18,7 @@
                 <img th:src="@{/images/konular.jpg}" src="" alt="..."/>
 
                 <div class="caption">
-                    <h1 th:text="${room.name}">Room name...</h1>
+                    <h1 th:text="${room.name}" style="text-decoration: underline;">Room name...</h1>
 
                     <div th:each="presentation : ${room.presentations}">
                         <h3 th:text="${presentation.name}">presentation name...</h3>

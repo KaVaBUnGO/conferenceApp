@@ -75,7 +75,7 @@ public class PresentationsController {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         CurrentUser currentUser = (CurrentUser) authentication.getPrincipal();
         presentation.setUsers(Arrays.asList(userRepository.findById(currentUser.getId())));
-        presentationRepository.save(presentation);
+        presentationRepository.saveAndFlush(presentation);
         return "redirect:list";
     }
 

@@ -15,7 +15,7 @@ public class Presentation {
     @Column(nullable = false)
     private String name;
 
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JoinColumn(name="room_id", nullable=false)
     private Room room;
 
