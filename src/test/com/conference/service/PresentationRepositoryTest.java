@@ -55,7 +55,7 @@ public class PresentationRepositoryTest {
         presentation.setName("Test");
         presentation.setRoom(roomRepository.findByName("Red room"));
         presentation.setUsers(Arrays.asList(userRepository.findById(1L)));
-        Presentation p = presentationRepository.saveAndFlush(presentation);
+        Presentation p = presentationRepository.save(presentation);
         assertEquals(p.getUsers().iterator().next().getName(), userRepository.findById(1L).getName());
     }
 }
