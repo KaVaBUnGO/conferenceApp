@@ -4,6 +4,7 @@ import com.conference.domain.CurrentUser;
 import com.conference.domain.User;
 import com.conference.domain.UserCreateForm;
 import com.conference.domain.validator.UserCreateFormValidator;
+import com.conference.service.EmailService;
 import com.conference.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,6 +35,9 @@ public class UserController {
     @Autowired
     private UserCreateFormValidator userCreateFormValidator;
 
+    @Autowired
+    private EmailService emailService;
+
     @InitBinder("form")
     public void initBinder(WebDataBinder binder){
         binder.addValidators(userCreateFormValidator);
@@ -58,6 +62,7 @@ public class UserController {
             Authentication auth =
                     new UsernamePasswordAuthenticationToken(currentUser, null, currentUser.getAuthorities());
             SecurityContextHolder.getContext().setAuthentication(auth);
+            emailService.sendMail("kavabungo1@gmail.com", "Hello", "lalalaTest");
         } catch (DataIntegrityViolationException e) {
             LOGGER.warn("Exception occurred when trying to save the user, assuming duplicate email", e);
             bindingResult.reject("email.exists", "Email already exists");
