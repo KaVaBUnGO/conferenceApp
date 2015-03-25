@@ -4,10 +4,12 @@ package com.conference.web;
 import com.conference.domain.CurrentUser;
 import com.conference.domain.Presentation;
 import com.conference.domain.Room;
-import com.conference.domain.User;
-import com.conference.service.PresentationRepository;
-import com.conference.service.RoomRepository;
-import com.conference.service.UserRepository;
+import com.conference.repository.PresentationRepository;
+import com.conference.repository.RoomRepository;
+import com.conference.repository.UserRepository;
+import com.conference.service.PresentationService;
+import com.conference.service.RoomService;
+import com.conference.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +21,6 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
-import sun.rmi.runtime.Log;
 
 import java.beans.PropertyEditorSupport;
 import java.util.Arrays;
@@ -32,13 +33,13 @@ public class PresentationsController {
     private static final Logger LOGGER = LoggerFactory.getLogger(PresentationsController.class);
 
     @Autowired
-    private PresentationRepository presentationRepository;
+    private PresentationService presentationService;
 
     @Autowired
-    private RoomRepository roomRepository;
+    private RoomService roomService;
 
     @Autowired
-    private UserRepository userRepository;
+    private UserService userService;
 
     @InitBinder
     protected void initBinder(WebDataBinder binder) {
@@ -52,8 +53,8 @@ public class PresentationsController {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         CurrentUser user = (CurrentUser) authentication.getPrincipal();
         model.addAttribute("presentation", new Presentation());
-        model.addAttribute("userPresentations", presentationRepository.findByUsersIdIn(Collections.singleton(user.getId())));
-        model.addAttribute("rooms", roomRepository.findAll());
+        model.addAttribute("userPresentations", presentationService.findByUsersId(Arrays.asList(user.getId())));
+        model.addAttribute("rooms", roomService.getAllRooms());
         return "presentations";
     }
 
@@ -63,27 +64,27 @@ public class PresentationsController {
         LOGGER.debug("Getting save presentation action ");
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         CurrentUser currentUser = (CurrentUser) authentication.getPrincipal();
-        presentation.setUsers(Arrays.asList(userRepository.findById(currentUser.getId())));
-        presentationRepository.save(presentation);
+        presentation.setUsers(Arrays.asList(userService.getUserById(currentUser.getId())));
+        presentationService.save(presentation);
         return "redirect:list";
     }
 
     @RequestMapping("/get/{presentationId}")
     @Secured("ROLE_PRESENTER")
-    public String getPresentation(@PathVariable Long presentationId, Model model){
+    public String getPresentation(@PathVariable Long presentationId, Model model) {
         LOGGER.debug("Getting presentation by id action");
-        Presentation presentation = presentationRepository.findOne(presentationId);
+        Presentation presentation = presentationService.findById(presentationId);
         model.addAttribute("presentation", presentation);
-        model.addAttribute("rooms", roomRepository.findAll());
+        model.addAttribute("rooms", roomService.getAllRooms());
         return "presentationForm";
     }
 
     @RequestMapping("/delete/{presentationId}")
     @Secured("ROLE_PRESENTER")
-    public String deletePresentation(@PathVariable("presentationId") Long presentationId){
+    public String deletePresentation(@PathVariable("presentationId") Long presentationId) {
         LOGGER.debug("Delete presentation by id action");
-        Presentation p = presentationRepository.findOne(presentationId);
-        presentationRepository.delete(p);
+        Presentation p = presentationService.findById(presentationId);
+        presentationService.delete(p);
         return "redirect:/presentations/list";
     }
 
@@ -92,7 +93,7 @@ public class PresentationsController {
         @Override
         public void setAsText(String text) throws IllegalArgumentException {
             Long id = Long.parseLong(text);
-            Room room = roomRepository.findOne(id);
+            Room room = roomService.getRoomById(id);
             setValue(room);
         }
     }

@@ -1,13 +1,12 @@
 package com.conference.service;
 
-import com.conference.domain.Presentation;
 import com.conference.domain.Role;
 import com.conference.domain.User;
 import com.conference.domain.UserCreateForm;
+import com.conference.repository.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Sort;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 

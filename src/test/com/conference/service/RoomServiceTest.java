@@ -2,31 +2,36 @@ package com.conference.service;
 
 import com.conference.ConferenceApplication;
 import com.conference.domain.Room;
-import com.conference.service.PresentationRepository;
-import com.conference.service.RoomRepository;
+import com.conference.repository.RoomRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import java.util.Arrays;
-import java.util.Collections;
-
+import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = ConferenceApplication.class)
-public class RoomRepositoryTest {
+public class RoomServiceTest {
 
     @Autowired
-    RoomRepository roomRepository;
+    RoomService roomService;
 
     @Test
-    public void findFirstRoom(){
-        Room firstRoom = this.roomRepository.findOne(1L);
-        assertEquals(firstRoom.getName(), "Red room");
+    public void testFindAllRooms(){
+        int count = this.roomService.getAllRooms().size();
+        assertEquals(count, 4);
+    }
+
+    @Test
+    public void testFindRoomById(){
+        String roomName = "Red room";
+        Room room = roomService.getRoomById(2L);
+        assertThat(room.getName(), is(roomName));
     }
 
 }

@@ -1,5 +1,7 @@
 package com.conference.service;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.MailSender;
 import org.springframework.mail.SimpleMailMessage;
@@ -7,8 +9,10 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
-@Service("mailService")
+@Service
 public class EmailService {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(JavaMailSender.class);
 
     @Autowired
     private JavaMailSender javaMailSender;
@@ -27,5 +31,9 @@ public class EmailService {
         SimpleMailMessage mailMessage = new SimpleMailMessage(configuredMessage);
         mailMessage.setTo(to);
         javaMailSender.send(mailMessage);
+    }
+
+    public void setPortAndHost(String port, String host){
+
     }
 }

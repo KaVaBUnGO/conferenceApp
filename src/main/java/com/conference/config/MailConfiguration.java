@@ -43,4 +43,5 @@ public class MailConfiguration {
         mailSender.setPassword(password);
         return mailSender;
     }
+    
 }
