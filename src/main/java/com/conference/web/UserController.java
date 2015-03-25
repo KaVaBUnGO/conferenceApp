@@ -80,8 +80,11 @@ public class UserController {
 
     @RequestMapping(value = "/users/save", method = RequestMethod.POST)
     @Secured("ROLE_ADMIN")
-    public String saveUser(@ModelAttribute("user") User user, BindingResult bindingResult) {
+    public String saveUser(@Valid @ModelAttribute("user") User user, BindingResult bindingResult) {
         LOGGER.debug("Getting save user action");
+        if (bindingResult.hasErrors()) {
+            return "userForm";
+        }
         userService.save(user);
         return "redirect:/users";
     }

@@ -19,9 +19,9 @@ public class MailConfiguration {
     @Value("${mail.port}")
     private int port;
     @Value("${mail.smtp.auth}")
-    private boolean auth;
+    private String auth;
     @Value("${mail.smtp.starttls.enable}")
-    private boolean starttls;
+    private String starttls;
     @Value("${mail.from}")
     private String from;
     @Value("${mail.username}")
@@ -33,12 +33,12 @@ public class MailConfiguration {
     public JavaMailSender javaMailSender() {
         JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
         Properties mailProperties = new Properties();
-        mailProperties.put("mail.smtp.auth", String.valueOf(auth));
-        mailProperties.put("mail.smtp.starttls.enable", String.valueOf(starttls));
+        mailProperties.put("mail.smtp.auth", auth);
+        mailProperties.put("mail.smtp.starttls.enable", starttls);
         mailSender.setJavaMailProperties(mailProperties);
         mailSender.setHost(host);
         mailSender.setPort(port);
- //       mailSender.setProtocol(protocol);
+        mailSender.setProtocol(protocol);
         mailSender.setUsername(username);
         mailSender.setPassword(password);
         return mailSender;

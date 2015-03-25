@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -19,9 +20,6 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserRepository userRepository;
-
-    @Autowired
-    private PresentationRepository presentationRepository;
 
     @Override
     public User getUserById(long id) {
@@ -39,7 +37,7 @@ public class UserServiceImpl implements UserService {
     public List<User> getAllUsers() {
         LOGGER.debug("Getting all users");
         List<User> users = new ArrayList<User>();
-        for(User user : userRepository.findAll()){
+        for (User user : userRepository.findAll()) {
             users.add(user);
         }
         return users;
@@ -50,7 +48,8 @@ public class UserServiceImpl implements UserService {
         LOGGER.debug("Create new user");
         User user = new User();
         user.setName(form.getName());
-        user.setPassword(form.getPassword());
+        user.setPassword(new BCryptPasswordEncoder().encode(form.getPassword()));
+        user.setEmail(form.getEmail());
         user.setRole(Role.ROLE_LISTENER);
         return userRepository.save(user);
     }
@@ -58,13 +57,15 @@ public class UserServiceImpl implements UserService {
     @Override
     public User save(User user) {
         LOGGER.debug("Save user");
+        if (user.getId() == null) {
+            user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
+        }
         return userRepository.save(user);
     }
 
     @Override
     public void delete(User user) {
         LOGGER.debug("Delete user");
-        List<Presentation> presentations = presentationRepository.findByUsersIdIn(Collections.singleton(user.getId()));
         userRepository.delete(user);
     }
 }

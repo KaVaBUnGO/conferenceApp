@@ -33,16 +33,18 @@
         <table class="table table-hover table-bordered">
             <thead>
             <tr>
-                <th width="25%">Id</th>
-                <th width="25%">Name</th>
-                <th width="25%">Role</th>
-                <th width="25%">Actions</th>
+                <th width="20%">Id</th>
+                <th width="20%">Name</th>
+                <th width="20%">Email</th>
+                <th width="20%">Role</th>
+                <th width="20%">Actions</th>
             </tr>
             </thead>
             <tbody>
                 <tr th:each="user : ${users}">
                     <td th:text="${user.id}">user id</td>
                     <td th:text="${user.name}">user name</td>
+                    <td th:text="${user.email}">user email</td>
                     <td th:text="${user.role}">user role</td>
 
                     <td><nobr>

@@ -6,18 +6,27 @@
 <body>
 <div class="container">
     <div th:fragment="userForm">
-        <form id="userForm" th:object="${user}" method="post"
+        <form id="userForm" th:object="${user}" method="post" data-toggle="validator"
               action="#" th:action="@{/users/save}" class="pure-form pure-form-aligned" role="form">
 
             <fieldset>
+                <div class="alert alert-danger" th:if="${#fields.hasErrors('*')}">
+                    <p th:each="err : ${#fields.errors('*')}" th:text="${err}"></p>
+                </div>
+
                 <div class="form-group">
                     <label for="name">Name: </label>
-                    <input id="name" type="text" th:field="*{name}" class="form-control"/>
+                    <input id="name" type="text" th:field="*{name}" class="form-control" required="required" />
                 </div>
 
                 <div class="form-group" th:classappend="${password}">
                     <label for="pwd">Password: </label>
-                    <input id="pwd" type="text" th:field="*{password}" class="form-control"/>
+                    <input id="pwd" type="text" th:field="*{password}" class="form-control" required="required" />
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email: </label>
+                    <input id="email" type="email"  name="email" th:field="*{email}" class="form-control" required="required" />
                 </div>
 
                 <div class="form-group">

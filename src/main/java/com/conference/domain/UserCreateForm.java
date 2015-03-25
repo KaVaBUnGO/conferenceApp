@@ -13,6 +13,9 @@ public class UserCreateForm {
     @NotEmpty
     private String passwordRepeated = "";
 
+    @NotEmpty
+    private String email = "";
+
     public String getName() {
         return name;
     }
@@ -37,12 +40,21 @@ public class UserCreateForm {
         this.passwordRepeated = passwordRepeated;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     @Override
     public String toString() {
         return "UserCreateForm{" +
                 "name='" + name + '\'' +
                 ", password=***" + '\'' +
                 ", passwordRepeated=***" + '\'' +
+                "email='" + email.replaceFirst("@.+", "@***") + '\'' +
                 '}';
     }
 }
