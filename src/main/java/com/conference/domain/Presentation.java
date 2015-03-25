@@ -15,11 +15,11 @@ public class Presentation {
     @Column(nullable = false)
     private String name;
 
-    @ManyToOne(optional = false, fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name="room_id", nullable=false)
     private Room room;
 
-    @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.EAGER)
+    @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
     @JoinTable(
             name = "presentation_user",
             joinColumns = {@JoinColumn(name="presentation_id", referencedColumnName = "id")},

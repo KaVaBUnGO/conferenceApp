@@ -1,5 +1,6 @@
 package com.conference.service;
 
+import com.conference.domain.Presentation;
 import com.conference.domain.Role;
 import com.conference.domain.User;
 import com.conference.domain.UserCreateForm;
@@ -18,6 +19,9 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private PresentationRepository presentationRepository;
 
     @Override
     public User getUserById(long id) {
@@ -43,10 +47,24 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User create(UserCreateForm form) {
+        LOGGER.debug("Create new user");
         User user = new User();
         user.setName(form.getName());
         user.setPassword(form.getPassword());
         user.setRole(Role.ROLE_LISTENER);
         return userRepository.save(user);
+    }
+
+    @Override
+    public User save(User user) {
+        LOGGER.debug("Save user");
+        return userRepository.save(user);
+    }
+
+    @Override
+    public void delete(User user) {
+        LOGGER.debug("Delete user");
+        List<Presentation> presentations = presentationRepository.findByUsersIdIn(Collections.singleton(user.getId()));
+        userRepository.delete(user);
     }
 }

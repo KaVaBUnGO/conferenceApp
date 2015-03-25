@@ -21,7 +21,8 @@
 
             <div class="panel panel-info">
                 <div class="panel-heading">
-                    <div class="panel-title">Sign Up</div>
+                    <div class="panel-title">Registration</div>
+                    <div style="float:right; font-size: 85%; position: relative; top:-10px"><a id="signinlink" href="#" th:href="@{/login}">Login</a></div>
                 </div>
                 <div class="panel-body" >
                     <form name="form" id="signupform" th:action="@{/user/create}" action="/user/create" method="POST"
