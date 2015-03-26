@@ -1,9 +1,12 @@
 buildscript {
+    ext {
+        springBootVersion = '1.2.2.RELEASE'
+    }
     repositories {
         mavenCentral()
     }
     dependencies {
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.2.2.RELEASE")
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
     }
 }
 
@@ -24,16 +27,17 @@ sourceCompatibility = 1.7
 targetCompatibility = 1.7
 
 dependencies {
-    compile('org.springframework.boot:spring-boot-starter-web:1.2.2.RELEASE')
-    compile('org.springframework.boot:spring-boot-starter-data-jpa:1.2.2.RELEASE');
-    compile('org.springframework.boot:spring-boot-starter-security:1.2.2.RELEASE');
-    compile('org.springframework.boot:spring-boot-starter-thymeleaf:1.2.2.RELEASE');
-    compile('org.thymeleaf.extras:thymeleaf-extras-springsecurity3:2.1.1.RELEASE');
-    runtime('hsqldb:hsqldb:1.8.0.10');
-    compile('org.springframework:spring-context-support:4.1.5.RELEASE');
+    compile('org.springframework.boot:spring-boot-starter-web')
+    compile('org.springframework.boot:spring-boot-starter-data-jpa');
+    compile('org.springframework.boot:spring-boot-starter-security');
+    compile('org.springframework.boot:spring-boot-starter-thymeleaf');
+    compile('org.thymeleaf.extras:thymeleaf-extras-springsecurity3');
+    runtime("org.hsqldb:hsqldb")
+    compile('org.springframework:spring-context-support');
     compile('javax.mail:mail:1.4.1');
     compile('com.icegreen:greenmail:1.4.0');
-    testCompile('org.springframework.boot:spring-boot-starter-test:1.2.2.RELEASE')
+    testCompile('org.springframework.boot:spring-boot-starter-test')
+    testCompile('com.jayway.jsonpath:json-path:2.0.0')
 }
 
 task wrapper(type: Wrapper) {
