@@ -48,13 +48,4 @@ public class UserCreateForm {
         this.email = email;
     }
 
-    @Override
-    public String toString() {
-        return "UserCreateForm{" +
-                "name='" + name + '\'' +
-                ", password=***" + '\'' +
-                ", passwordRepeated=***" + '\'' +
-                "email='" + email.replaceFirst("@.+", "@***") + '\'' +
-                '}';
-    }
 }

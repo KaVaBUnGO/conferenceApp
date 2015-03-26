@@ -66,10 +66,4 @@ public class Presentation {
         this.users = users;
     }
 
-    @Override
-    public String toString() {
-        return String.format(
-                "Presentation[id=%d, name='%s']",
-                id, name);
-    }
 }

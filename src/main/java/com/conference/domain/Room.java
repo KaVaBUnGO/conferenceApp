@@ -48,10 +48,4 @@ public class Room {
         this.presentations = presentations;
     }
 
-    @Override
-    public String toString() {
-        return String.format(
-                "Room[id=%d, name='%s']",
-                id, name);
-    }
 }

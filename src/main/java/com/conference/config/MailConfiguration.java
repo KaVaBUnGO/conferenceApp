@@ -12,25 +12,24 @@ import java.util.Properties;
 @Configuration
 public class MailConfiguration {
 
-    @Value("${mail.protocol}")
-    private String protocol;
-    @Value("${mail.host}")
-    private String host;
-    @Value("${mail.port}")
-    private int port;
-    @Value("${mail.smtp.auth}")
-    private String auth;
-    @Value("${mail.smtp.starttls.enable}")
-    private String starttls;
-    @Value("${mail.from}")
-    private String from;
-    @Value("${mail.username}")
-    private String username;
-    @Value("${mail.password}")
-    private String password;
-
     @Bean
-    public JavaMailSender javaMailSender() {
+    public JavaMailSenderImpl emailSender(@Value("${mail.protocol}")
+                                         String protocol,
+                                         @Value("${mail.host}")
+                                         String host,
+                                         @Value("${mail.port}")
+                                         int port,
+                                         @Value("${mail.smtp.auth}")
+                                         String auth,
+                                         @Value("${mail.smtp.starttls.enable}")
+                                         String starttls,
+                                         @Value("${mail.from}")
+                                         String from,
+                                         @Value("${mail.username}")
+                                         String username,
+                                         @Value("${mail.password}")
+                                         String password) {
+
         JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
         Properties mailProperties = new Properties();
         mailProperties.put("mail.smtp.auth", auth);
