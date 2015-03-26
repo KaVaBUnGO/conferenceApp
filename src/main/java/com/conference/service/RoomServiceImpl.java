@@ -20,7 +20,7 @@ public class RoomServiceImpl implements RoomService {
     @Override
     public List<Room> getAllRooms() {
         LOGGER.debug("Getting all rooms");
-        return (List)roomRepository.findAll();
+        return (List) roomRepository.findAll();
     }
 
     @Override

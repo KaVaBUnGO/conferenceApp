@@ -28,6 +28,13 @@ public class PresentationsController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(PresentationsController.class);
 
+    protected static final String PATH_ROOT = "/";
+    protected static final String PATH_LIST = "/list";
+    protected static final String PATH_SAVE = "/save";
+    protected static final String PATH_GET = "/get/{presentationId}";
+    protected static final String PATH_DELETE = "/delete/{presentationId}";
+
+
     @Autowired
     private PresentationService presentationService;
 
@@ -42,7 +49,7 @@ public class PresentationsController {
         binder.registerCustomEditor(Room.class, new RoomEditor());
     }
 
-    @RequestMapping(value = {"/", "/list"})
+    @RequestMapping(value = {PATH_ROOT, PATH_LIST})
     @Secured("ROLE_PRESENTER")
     public String getPresentationsPage(Model model) {
         LOGGER.debug("Getting presentations page");
@@ -54,7 +61,7 @@ public class PresentationsController {
         return "presentations";
     }
 
-    @RequestMapping(value = "/save", method = RequestMethod.POST)
+    @RequestMapping(value = PATH_SAVE, method = RequestMethod.POST)
     @Secured("ROLE_PRESENTER")
     public String savePresentation(@ModelAttribute("presentation") Presentation presentation, BindingResult bindingResult) {
         LOGGER.debug("Getting save presentation action ");
@@ -65,7 +72,7 @@ public class PresentationsController {
         return "redirect:list";
     }
 
-    @RequestMapping("/get/{presentationId}")
+    @RequestMapping(PATH_GET)
     @Secured("ROLE_PRESENTER")
     public String getPresentation(@PathVariable Long presentationId, Model model) {
         LOGGER.debug("Getting presentation by id action");
@@ -75,7 +82,7 @@ public class PresentationsController {
         return "presentationForm";
     }
 
-    @RequestMapping(value = "/delete/{presentationId}", method = RequestMethod.POST)
+    @RequestMapping(value = PATH_DELETE, method = RequestMethod.POST)
     @Secured("ROLE_PRESENTER")
     public String deletePresentation(@PathVariable("presentationId") Long presentationId) {
         LOGGER.debug("Delete presentation by id action");

@@ -26,9 +26,9 @@ public class PresentationServiceImpl implements PresentationService {
     public List<ScheduleRow> getSchedule() {
         LOGGER.debug("Getting schedule");
         List<ScheduleRow> schedule = new ArrayList<ScheduleRow>();
-        for(Presentation presentation : presentationRepository.findAll()){
+        for (Presentation presentation : presentationRepository.findAll()) {
             ArrayList<String> authorsList = new ArrayList<String>();
-            for(User user : presentation.getUsers()){
+            for (User user : presentation.getUsers()) {
                 authorsList.add(user.getName());
             }
             ScheduleRow row = new ScheduleRow(presentation.getName(), presentation.getRoom().getName(), authorsList);

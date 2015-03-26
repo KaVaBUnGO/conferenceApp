@@ -10,5 +10,6 @@ import java.util.List;
 public interface PresentationRepository extends CrudRepository<Presentation, Long> {
 
     List<Presentation> findByUsersIn(Collection<User> users);
+
     List<Presentation> findByUsersIdIn(Collection<Long> id);
 }

@@ -13,11 +13,13 @@ public class IndexController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(IndexController.class);
 
+    protected static final String PATH_ROOT = "/";
+
     @Autowired
     private RoomService roomService;
 
-    @RequestMapping("/")
-    public String getHomePage(Model model){
+    @RequestMapping(PATH_ROOT)
+    public String getHomePage(Model model) {
         LOGGER.debug("Getting home page");
         model.addAttribute("rooms", roomService.getAllRooms());
         return "index";

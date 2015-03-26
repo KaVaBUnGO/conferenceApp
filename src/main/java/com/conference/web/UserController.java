@@ -27,6 +27,12 @@ public class UserController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(UserController.class);
 
+    protected static final String PATH_ROOT = "/users";
+    protected static final String PATH_CREATE = "/user/create";
+    protected static final String PATH_SAVE = "/users/save";
+    protected static final String PATH_GET = "/users/get/{userId}";
+    protected static final String PATH_DELETE = "/users/delete/{userId}";
+
     @Autowired
     private UserService userService;
 
@@ -41,15 +47,16 @@ public class UserController {
         binder.addValidators(userCreateFormValidator);
     }
 
-    @RequestMapping(value = "/user/create", method = RequestMethod.GET)
+    @RequestMapping(value = PATH_CREATE, method = RequestMethod.GET)
     public String getUserCreatePage(Model model) {
         LOGGER.debug("Getting user create form");
         model.addAttribute("form", new UserCreateForm());
         return "userCreate";
     }
 
-    @RequestMapping(value = "/user/create", method = RequestMethod.POST)
+    @RequestMapping(value = PATH_CREATE, method = RequestMethod.POST)
     public String handleUserCreateForm(@Valid @ModelAttribute("form") UserCreateForm form, BindingResult bindingResult) {
+
         LOGGER.debug("Processing user create form={}, bindingResult={}", form, bindingResult);
         if (bindingResult.hasErrors()) {
             return "userCreate";
@@ -69,7 +76,7 @@ public class UserController {
         return "redirect:/";
     }
 
-    @RequestMapping("/users")
+    @RequestMapping(PATH_ROOT)
     @Secured("ROLE_ADMIN")
     public String getUsers(Model model) {
         LOGGER.debug("Getting users list");
@@ -78,7 +85,7 @@ public class UserController {
         return "users";
     }
 
-    @RequestMapping(value = "/users/save", method = RequestMethod.POST)
+    @RequestMapping(value = PATH_SAVE, method = RequestMethod.POST)
     @Secured("ROLE_ADMIN")
     public String saveUser(@Valid @ModelAttribute("user") User user, BindingResult bindingResult) {
         LOGGER.debug("Getting save user action");
@@ -89,7 +96,7 @@ public class UserController {
         return "redirect:/users";
     }
 
-    @RequestMapping("/users/get/{userId}")
+    @RequestMapping(PATH_GET)
     @Secured("ROLE_ADMIN")
     public String getUser(@PathVariable("userId") Long userId, Model model) {
         LOGGER.debug("Getting get user action" + userId);
@@ -99,7 +106,7 @@ public class UserController {
         return "userForm";
     }
 
-    @RequestMapping(value = "/users/delete/{userId}", method = RequestMethod.POST)
+    @RequestMapping(value = PATH_DELETE, method = RequestMethod.POST)
     @Secured("ROLE_ADMIN")
     public String deleteUser(@PathVariable("userId") Long userId) {
         LOGGER.debug("Delete user by id action");

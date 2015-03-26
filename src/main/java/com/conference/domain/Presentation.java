@@ -14,13 +14,13 @@ public class Presentation {
     private String name;
 
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    @JoinColumn(name="room_id", nullable=false)
+    @JoinColumn(name = "room_id", nullable = false)
     private Room room;
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "presentation_user",
-            joinColumns = {@JoinColumn(name="presentation_id", referencedColumnName = "id")},
+            joinColumns = {@JoinColumn(name = "presentation_id", referencedColumnName = "id")},
             inverseJoinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")})
     private List<User> users;
 

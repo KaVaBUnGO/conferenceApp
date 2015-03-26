@@ -12,21 +12,21 @@ public class MailConfiguration {
 
     @Bean
     public JavaMailSenderImpl emailSender(@Value("${mail.protocol}")
-                                         String protocol,
-                                         @Value("${mail.host}")
-                                         String host,
-                                         @Value("${mail.port}")
-                                         int port,
-                                         @Value("${mail.smtp.auth}")
-                                         String auth,
-                                         @Value("${mail.smtp.starttls.enable}")
-                                         String starttls,
-                                         @Value("${mail.from}")
-                                         String from,
-                                         @Value("${mail.username}")
-                                         String username,
-                                         @Value("${mail.password}")
-                                         String password) {
+                                          String protocol,
+                                          @Value("${mail.host}")
+                                          String host,
+                                          @Value("${mail.port}")
+                                          int port,
+                                          @Value("${mail.smtp.auth}")
+                                          String auth,
+                                          @Value("${mail.smtp.starttls.enable}")
+                                          String starttls,
+                                          @Value("${mail.from}")
+                                          String from,
+                                          @Value("${mail.username}")
+                                          String username,
+                                          @Value("${mail.password}")
+                                          String password) {
 
         JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
         Properties mailProperties = new Properties();

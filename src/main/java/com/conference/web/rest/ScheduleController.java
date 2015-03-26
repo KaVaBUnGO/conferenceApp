@@ -19,8 +19,17 @@ public class ScheduleController {
     @Autowired
     private PresentationService presentationService;
 
-    @RequestMapping("/schedule")
-    public List<ScheduleRow> getSchedule(){
+    private static final String PATH_SCHEDULE = "/schedule";
+
+    /**
+     * Return a schedule in JSON format.
+     * Schedule row contains presentationName, room
+     * and authors fields.
+     *
+     * @return List of scheduleRow objects in JSON
+     */
+    @RequestMapping(PATH_SCHEDULE)
+    public List<ScheduleRow> getSchedule() {
         return presentationService.getSchedule();
     }
 }
