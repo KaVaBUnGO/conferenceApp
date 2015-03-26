@@ -10,14 +10,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import javax.transaction.Transactional;
-
+import static org.hamcrest.Matchers.greaterThan;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = ConferenceApplication.class)
-@Transactional
 public class UserServiceTest {
 
     @Autowired
@@ -37,13 +35,13 @@ public class UserServiceTest {
 
     @Test
     public void testGetAllUsers() throws Exception {
-        assertThat(userService.getAllUsers().size(), is(3));
+        assertThat(userService.getAllUsers().size(), greaterThan(2));
     }
 
     @Test
     public void testCreate() throws Exception {
         UserCreateForm userCreateForm = new UserCreateForm();
-        userCreateForm.setName("test");
+        userCreateForm.setName("testUser");
         userCreateForm.setEmail("test@mail.com");
         userCreateForm.setPassword("test");
         User testUser = userService.create(userCreateForm);

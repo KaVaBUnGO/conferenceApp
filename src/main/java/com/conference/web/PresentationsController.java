@@ -4,9 +4,6 @@ package com.conference.web;
 import com.conference.domain.CurrentUser;
 import com.conference.domain.Presentation;
 import com.conference.domain.Room;
-import com.conference.repository.PresentationRepository;
-import com.conference.repository.RoomRepository;
-import com.conference.repository.UserRepository;
 import com.conference.service.PresentationService;
 import com.conference.service.RoomService;
 import com.conference.service.UserService;
@@ -24,7 +21,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.beans.PropertyEditorSupport;
 import java.util.Arrays;
-import java.util.Collections;
 
 @Controller
 @RequestMapping("/presentations")
@@ -79,7 +75,7 @@ public class PresentationsController {
         return "presentationForm";
     }
 
-    @RequestMapping("/delete/{presentationId}")
+    @RequestMapping(value = "/delete/{presentationId}", method = RequestMethod.POST)
     @Secured("ROLE_PRESENTER")
     public String deletePresentation(@PathVariable("presentationId") Long presentationId) {
         LOGGER.debug("Delete presentation by id action");

@@ -23,6 +23,10 @@
         <div id="userDialog" style="display: none;">
             <div th:replace="userForm :: userForm">&nbsp;</div>
         </div>
+        <div id="dialog-confirm" title="Delete?" style="display: none;">
+            <p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0; "></span>
+                Delete this user. Are you sure?</p>
+        </div>
         <div class="panel panel-primary">
             <div class="panel-heading"><h2>List of users</h2></div>
             <div class="panel-body">
@@ -41,7 +45,7 @@
             </tr>
             </thead>
             <tbody>
-                <tr th:each="user : ${users}">
+                <tr th:each="user : ${users}" th:id="'user-' + ${user.id}">
                     <td th:text="${user.id}">user id</td>
                     <td th:text="${user.name}">user name</td>
                     <td th:text="${user.email}">user email</td>
@@ -55,8 +59,8 @@
                         </button>
 
                         <a class="btn btn-primary"
-                           onclick="return confirm('Are you sure you want to delete this presentation?');"
-                           href="#" th:href="@{/users/delete/{id}(id=${user.id})}">
+                           onclick="return confirm('Are you sure you want to delete this user?');"
+                           th:onclick="'javascript:deleteUser(\'' + ${user.id} + '\');'">
                                  <i class="fa fa-times"></i>Delete
                         </a>
 

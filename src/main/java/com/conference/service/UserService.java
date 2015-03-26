@@ -2,6 +2,7 @@ package com.conference.service;
 
 import com.conference.domain.User;
 import com.conference.domain.UserCreateForm;
+
 import java.util.List;
 
 public interface UserService {

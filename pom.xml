@@ -70,8 +70,15 @@
         <dependency>
             <groupId>com.icegreen</groupId>
             <artifactId>greenmail</artifactId>
+            <version>1.4.0</version>
         </dependency>
 
+        <dependency>
+            <groupId>com.jayway.jsonpath</groupId>
+            <artifactId>json-path</artifactId>
+            <version>2.0.0</version>
+            <scope>test</scope>
+        </dependency>
 
     </dependencies>
 
@@ -87,13 +94,6 @@
     </build>
 
     <repositories>
-        <repository>
-            <id>spring-snapshots</id>
-            <url>http://repo.spring.io/snapshot</url>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-        </repository>
         <repository>
             <id>spring-milestones</id>
             <url>http://repo.spring.io/milestone</url>
@@ -112,10 +112,6 @@
         </repository>
     </repositories>
     <pluginRepositories>
-        <pluginRepository>
-            <id>spring-snapshots</id>
-            <url>http://repo.spring.io/snapshot</url>
-        </pluginRepository>
         <pluginRepository>
             <id>spring-milestones</id>
             <url>http://repo.spring.io/milestone</url>

@@ -1,6 +1,5 @@
 package com.conference.web;
 
-import com.conference.repository.RoomRepository;
 import com.conference.service.RoomService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

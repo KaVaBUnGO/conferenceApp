@@ -1,7 +1,5 @@
 package com.conference.domain;
 
-import org.hibernate.annotations.Cascade;
-
 import javax.persistence.*;
 import java.util.List;
 
@@ -19,7 +17,7 @@ public class Presentation {
     @JoinColumn(name="room_id", nullable=false)
     private Room room;
 
-    @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "presentation_user",
             joinColumns = {@JoinColumn(name="presentation_id", referencedColumnName = "id")},

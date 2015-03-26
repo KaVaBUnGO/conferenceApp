@@ -15,6 +15,31 @@ function editUser(id) {
 	});
 }
 
+function deleteUser(id) {
+
+	$( "#dialog-confirm" ).dialog({
+		resizable: false,
+		height:200,
+		width: 300,
+		modal: true,
+		buttons: {
+			"Delete user": function() {
+				$.ajax({
+					url: "/users/delete/" + id,
+					type: "POST",
+					success:function(response) {
+						$('#user-'+id).hide()
+					}
+				});
+				$( this ).dialog( "close" );
+			},
+			Cancel: function() {
+				$( this ).dialog( "close" );
+			}
+		}
+	});
+}
+
 function resetDialog(form) {
 
 	form.find("input").val("");
@@ -43,5 +68,13 @@ $(document).ready(function() {
 
 			$(this).dialog('close');
 		}
+	});
+});
+
+$(function () {
+	var token = $("input[name='_csrf']").val();
+	var header = "X-CSRF-TOKEN";
+	$(document).ajaxSend(function(e, xhr, options) {
+		xhr.setRequestHeader(header, token);
 	});
 });

@@ -99,7 +99,7 @@ public class UserController {
         return "userForm";
     }
 
-    @RequestMapping("/users/delete/{userId}")
+    @RequestMapping(value = "/users/delete/{userId}", method = RequestMethod.POST)
     @Secured("ROLE_ADMIN")
     public String deleteUser(@PathVariable("userId") Long userId) {
         LOGGER.debug("Delete user by id action");

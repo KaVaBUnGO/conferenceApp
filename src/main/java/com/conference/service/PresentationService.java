@@ -3,7 +3,6 @@ package com.conference.service;
 
 import com.conference.domain.Presentation;
 import com.conference.domain.ScheduleRow;
-import com.conference.domain.User;
 
 import java.util.List;
 
