@@ -9,7 +9,7 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
-@Service
+@Service("mailService")
 public class EmailService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(JavaMailSender.class);
@@ -31,9 +31,5 @@ public class EmailService {
         SimpleMailMessage mailMessage = new SimpleMailMessage(configuredMessage);
         mailMessage.setTo(to);
         javaMailSender.send(mailMessage);
-    }
-
-    public void setPortAndHost(String port, String host){
-
     }
 }

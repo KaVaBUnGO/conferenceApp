@@ -60,7 +60,7 @@ public class UserController {
             Authentication auth =
                     new UsernamePasswordAuthenticationToken(currentUser, null, currentUser.getAuthorities());
             SecurityContextHolder.getContext().setAuthentication(auth);
-//            emailService.sendMail("kavabungo1@gmail.com", "Welcome!", "Thx for registration :)");
+            emailService.sendMail(currentUser.getUser().getEmail(), "Welcome!", "Thx for registration :)");
         } catch (DataIntegrityViolationException e) {
             LOGGER.warn("Exception occurred when trying to save the user, assuming duplicate email", e);
             bindingResult.reject("email.exists", "Email already exists");

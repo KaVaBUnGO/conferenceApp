@@ -29,12 +29,11 @@ dependencies {
     compile('org.springframework.boot:spring-boot-starter-security:1.2.2.RELEASE');
     compile('org.springframework.boot:spring-boot-starter-thymeleaf:1.2.2.RELEASE');
     compile('org.thymeleaf.extras:thymeleaf-extras-springsecurity3:2.1.1.RELEASE');
-    compile('org.springframework.boot:spring-boot-starter-test:1.2.2.RELEASE');
-    compile('hsqldb:hsqldb:1.8.0.10');
+    runtime('hsqldb:hsqldb:1.8.0.10');
     compile('org.springframework:spring-context-support:4.1.5.RELEASE');
     compile('javax.mail:mail:1.4.1');
     compile('com.icegreen:greenmail:1.4.0');
-    testCompile("junit:junit")
+    testCompile('org.springframework.boot:spring-boot-starter-test:1.2.2.RELEASE')
 }
 
 task wrapper(type: Wrapper) {

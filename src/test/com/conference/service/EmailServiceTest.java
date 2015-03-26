@@ -27,23 +27,27 @@ import static org.junit.Assert.assertTrue;
 public class EmailServiceTest {
 
     @Autowired
-    private JavaMailSenderImpl javaMailSender;
+    private EmailService emailService;
 
-    private GreenMail testSmtp;
+    /*
+        @Autowired
+        private JavaMailSenderImpl javaMailSender;
 
-    @Before
-    public void testSmtpInit() {
-        testSmtp = new GreenMail(ServerSetupTest.SMTP);
-        testSmtp.start();
+        private GreenMail testSmtp;
 
-        javaMailSender.setPort(3025);
-        javaMailSender.setHost("localhost");
-    }
+        @Before
+        public void testSmtpInit() {
+            testSmtp = new GreenMail(ServerSetupTest.SMTP);
+            testSmtp.start();
 
+            javaMailSender.setPort(3025);
+            javaMailSender.setHost("localhost");
+        }
+    */
     @Test
     public void testSendMail() {
+        /*
         SimpleMailMessage message = new SimpleMailMessage();
-
         message.setFrom("test@sender.com");
         message.setTo("test@receiver.com");
         message.setSubject("test subject");
@@ -54,12 +58,16 @@ public class EmailServiceTest {
         Message[] messages = testSmtp.getReceivedMessages();
         assertEquals(1, messages.length);
         String body = GreenMailUtil.getBody(messages[0]).replaceAll("=\r?\n", "");
-        assertEquals("test message", body);
-    }
+        assertEquals("test message", body); */
 
+        emailService.sendMail("kavabungo1@gmail.com", "test", "test");
+
+    }
+/*
     @After
     public void cleanup() {
         testSmtp.stop();
     }
+    */
 }
 
